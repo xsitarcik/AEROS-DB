@@ -18,7 +18,7 @@ The database serves two purposes. At first, reads are being mapped to the databa
     git clone git@github.com:xsitarcik/operons-bryndza.git
 
 #### Mapping to DB
-[Minimap2](https://github.com/lh3/minimap2) was tested for mapping reads to the database. For ONT nanopore reads, for example reads from two replicates named as `replicate01.fastq` and  `replicate02.fastq` mapping can be run as follows:
+[Minimap2](https://github.com/lh3/minimap2) was tested for mapping reads to the database. For ONT nanopore reads, for example when having two sets of reads obtained from two replicates, named as `replicate01.fastq` and  `replicate02.fastq`, the mapping to the database can be run as follows (if running from the cloned directory):
 
     minimap2 -t 32 -cx map-ont progenome_db.fa.gz replicate01.fastq -z 70 \
     > replicate01.paf
