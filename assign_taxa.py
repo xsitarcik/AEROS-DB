@@ -49,7 +49,9 @@ def classify_reads(pafs,out_path,db,MIN_LENGTH,MIN_SCORE_PERCENTILE,rank):
     if out_path is not None:
     	df.to_csv(out_path, index = True, header=True)
     else:
-    	display(df)
+        with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+            print(df)
+
 
 # parse_taxonomy information according to used classification level
 def parse_dicts(dicts,rank):
