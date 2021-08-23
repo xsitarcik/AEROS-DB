@@ -13,7 +13,10 @@ Database consists of two files:
 If you use our constructed database, or scripts, please, consider citing our paper and papers mentioned below in References.
 
 ### Database usage
-The database serves two purposes. At first, reads are being mapped to the database. Then, taxonomy is assigned using mapping results.
+The database serves two purposes. At first, reads are being mapped to the database. Then, taxonomy is assigned using mapping results. Start using the database by cloning this repository, i.e.:
+
+    git clone git@github.com:xsitarcik/operons-bryndza.git
+
 #### Mapping to DB
 [Minimap2](https://github.com/lh3/minimap2) was tested for mapping reads to the database. For ONT nanopore reads, for example reads from two replicates named as `replicate01.fastq` and  `replicate02.fastq` mapping can be run as follows:
 
