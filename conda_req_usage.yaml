@@ -1,4 +1,4 @@
-name: operons-db-use
+name: eros-db
 channels:
 - conda-forge
 dependencies:
