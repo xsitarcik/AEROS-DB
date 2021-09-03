@@ -1,33 +1,33 @@
 # Microbial consortia composition evaluation by MinION ribosomal operons (rrn) sequencing of artificial mock and natural complex community in traditional Slovak ewe's (sheep) cheese (Slovakian bryndza)
 
-This repository contains the rrn operons database created from contigs of representative genomes downloaded from [proGenomes v2.1 database](https://progenomes.embl.de/download.cgi), and other supplementary material, which is used in our to-be submitted paper:     
+This repository contains the rrn opEROns sequences DataBase (EROS-DB) created from contigs of representative genomes downloaded from [proGenomes v2.1 database](https://progenomes.embl.de/download.cgi), and other supplementary material, which is used in our to-be submitted paper:     
 Plany M., Sitarcik J., Pavlovic J., Budis J., Kuchta T., Pangallo D.: Microbial consortia composition evaluation by MinION ribosomal operons (rrn) sequencing of artificial mock and natural complex community in traditional Slovak ewe's (sheep) cheese (Slovakian bryndza).
 
-## RRN operons database (in paper denoted as "progenomesDB")
-Our database contains 7192 operon sequences, where each operon sequence is associated with an unique organism. The database was constructed with the use of [BioPython](https://biopython.org/docs/1.75/api/index.html) package.
+## EROS-DB
+EROS-DB contains 7192 operon sequences, where each operon sequence is associated with an unique organism. The database was constructed with the use of [BioPython](https://biopython.org/docs/1.75/api/index.html) package.
 Database consists of two files:
 
- - [progenome_db.fa.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/progenome_db.fa.gz "progenome_db.fa.gz") - gzipped file of FASTA sequences representing rrn operon sequences with NCBI header 
- - [progenome_db.json.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/progenome_db.json.gz "progenome_db.json.gz") - JSON file storing mapping between headers and NCBI lineage for fast and consistent taxonomy retrieval
+ - [eros-db.fa.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/eros-db.fa.gz "eros-db.fa.gz") - gzipped file of FASTA sequences representing rrn operon sequences with the NCBI header 
+ - [eros-db.json.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/eros-db.json.gz "eros-db.json.gz") - JSON file storing mapping between headers and NCBI lineage for fast and consistent taxonomy retrieval
 
-If you use our constructed database, or scripts, please, consider citing our paper and papers mentioned below in References.
+If you use EROS-DB, or any other scripts in this repository, please, consider citing our paper and papers mentioned below in References, if appropriate.
 
 ### Database usage
-The database serves two purposes. At first, reads are being mapped to the database. Then, taxonomy is assigned using mapping results. Start using the database by cloning this repository, i.e.:
+EROS-DB serves two purposes. At first, reads are being mapped to the database. Then, taxonomy is assigned using mapping results. Start using the database by cloning this repository, i.e.:
 
-    git clone git@github.com:xsitarcik/operons-bryndza.git
+    git clone git@github.com:xsitarcik/EROS-DB.git
 
 #### Mapping to DB
 [Minimap2](https://github.com/lh3/minimap2) was tested for mapping reads to the database. For ONT nanopore reads, for example when having two sets of reads obtained from two replicates, named as `replicate01.fastq` and  `replicate02.fastq`, the mapping to the database can be run as follows (if running from the cloned directory):
 
-    minimap2 -t 32 -cx map-ont progenome_db.fa.gz replicate01.fastq -z 70 \
+    minimap2 -t 32 -cx map-ont eros-db.fa.gz replicate01.fastq -z 70 \
     > replicate01.paf
-    minimap2 -t 32 -cx map-ont progenome_db.fa.gz replicate02.fastq -z 70 \
+    minimap2 -t 32 -cx map-ont eros-db.fa.gz replicate02.fastq -z 70 \
     > replicate02.paf
 
 #### Assigning taxonomy
  1. Create conda environment with requirements: `conda env create -f conda_req_usage.yaml`
- 2. Activate conda: `conda activate operons-db-use`
+ 2. Activate conda: `conda activate eros-db`
  3. Run assign taxonomy for example: `python assign_taxa.py -p replicate01.paf replicate02.paf -r genus -o genus_results.csv`
 
 This creates `genus_results.csv` file as given by `-o` argument (omitting `-o` argument will output results to stdout). This file records the composition in percentage and of the `genus` rank, as given by `-r` argument. Taxonomy can be assigned on various ranks, recommended to use are: `species`, `genus`, `family`, `order`.
