@@ -1,33 +1,33 @@
-# Microbial consortia composition evaluation by MinION ribosomal operons (rrn) sequencing of artificial mock and natural complex community in traditional Slovak ewe's (sheep) cheese (Slovakian bryndza)
+# Evaluation of bacterial consortia associated with dairy fermentation by ribosomal RNA (rrn) operon metabarcoding strategy using MinION device
 
-This repository contains the rrn opEROns sequences DataBase (EROS-DB) created from contigs of representative genomes downloaded from [proGenomes v2.1 database](https://progenomes.embl.de/download.cgi), and other supplementary material, which is used in our to-be submitted paper:     
-Plany M., Sitarcik J., Pavlovic J., Budis J., Kuchta T., Pangallo D.: Microbial consortia composition evaluation by MinION ribosomal operons (rrn) sequencing of artificial mock and natural complex community in traditional Slovak ewe's (sheep) cheese (Slovakian bryndza).
+This repository contains AEROS-DB (Almost Entire Ribosomal Operon Sequences DataBase), created from contigs of representative genomes downloaded from [proGenomes v2.1 database](https://progenomes.embl.de/download.cgi), and other supplementary material, which is used in our to-be submitted paper:     
+Plany M., Sitarcik J., Pavlovic J., Budis J., Korenova J., Kuchta T., Pangallo D.: Evaluation of bacterial consortia associated with dairy fermentation by ribosomal RNA (rrn) operon metabarcoding strategy using MinION device.
 
-## EROS-DB
-EROS-DB contains 7192 operon sequences, where each operon sequence is associated with an unique organism. The database was constructed with the use of [BioPython](https://biopython.org/docs/1.75/api/index.html) package.
+## AEROS-DB
+AEROS-DB contains 7192 operon sequences, where each operon sequence is associated with an unique organism. The database was constructed with the use of [BioPython](https://biopython.org/docs/1.75/api/index.html) package.
 Database consists of two files:
 
- - [eros-db.fa.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/eros-db.fa.gz "eros-db.fa.gz") - gzipped file of FASTA sequences representing rrn operon sequences with the NCBI header 
- - [eros-db.json.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/eros-db.json.gz "eros-db.json.gz") - JSON file storing mapping between headers and NCBI lineage for fast and consistent taxonomy retrieval
+ - [aeros-db.fa.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/aeros-db.fa.gz "aeros-db.fa.gz") - gzipped file of FASTA sequences representing rrn operon sequences with the NCBI header 
+ - [aeros-db.json.gz](https://github.com/xsitarcik/operons-bryndza/blob/main/aeros-db.json.gz "aeros-db.json.gz") - JSON file storing mapping between headers and NCBI lineage for fast and consistent taxonomy retrieval
 
-If you use EROS-DB, or any other scripts in this repository, please, consider citing our paper and papers mentioned below in References, if appropriate.
+If you use AEROS-DB, or any other scripts in this repository, please, consider citing our paper and papers mentioned below in References, if appropriate.
 
-### Database usage
-EROS-DB serves two purposes. At first, reads are being mapped to the database. Then, taxonomy is assigned using mapping results. Start using the database by cloning this repository, i.e.:
+### AEROS-DB usage
+AEROS-DB serves two purposes. At first, to map reads to the database. Then, to assign taxonomy using mapping results. Start using AEROS-DB by cloning this repository, i.e.:
 
-    git clone git@github.com:xsitarcik/EROS-DB.git
+    git clone git@github.com:xsitarcik/AEROS-DB.git
 
-#### Mapping to DB
+#### Mapping to AEROS-DB
 [Minimap2](https://github.com/lh3/minimap2) was tested for mapping reads to the database. For ONT nanopore reads, for example when having two sets of reads obtained from two replicates, named as `replicate01.fastq` and  `replicate02.fastq`, the mapping to the database can be run as follows (if running from the cloned directory):
 
-    minimap2 -t 32 -cx map-ont eros-db.fa.gz replicate01.fastq -z 70 \
+    minimap2 -t 32 -cx map-ont aeros-db.fa.gz replicate01.fastq -z 70 \
     > replicate01.paf
-    minimap2 -t 32 -cx map-ont eros-db.fa.gz replicate02.fastq -z 70 \
+    minimap2 -t 32 -cx map-ont aeros-db.fa.gz replicate02.fastq -z 70 \
     > replicate02.paf
 
 #### Assigning taxonomy
  1. Create conda environment with requirements: `conda env create -f conda_req_usage.yaml`
- 2. Activate conda: `conda activate eros-db`
+ 2. Activate conda: `conda activate aeros-db`
  3. Run assign taxonomy for example: `python assign_taxa.py -p replicate01.paf replicate02.paf -r genus -o genus_results.csv`
 
 This creates `genus_results.csv` file as given by `-o` argument (omitting `-o` argument will output results to stdout). This file records the composition in percentage and of the `genus` rank, as given by `-r` argument. Taxonomy can be assigned on various ranks, recommended to use are: `species`, `genus`, `family`, `order`.
