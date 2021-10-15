@@ -91,7 +91,7 @@ print("Assigning taxonomy with the following settings:")
 print("Minimum aligned block length:",args.min_length)
 print("Percentage of the best aligned reads used for taxonomy:",args.min_score)
 
-db_dict = load_db("progenome_db.json.gz")
+db_dict = load_db("aeros-db.json.gz")
 classify_reads(args.pafs_list,args.out_path,db_dict,args.min_length,args.min_score,args.rank)
 
 

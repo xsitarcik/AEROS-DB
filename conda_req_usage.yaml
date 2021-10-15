@@ -1,4 +1,4 @@
-name: eros-db
+name: aeros-db
 channels:
 - conda-forge
 dependencies:
