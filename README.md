@@ -54,12 +54,15 @@ Outputted file is .csv file with the header row denoting the paf filenames, whil
       -s MIN_SCORE, --min_score MIN_SCORE
                             Percentage of the best aligned reads to use
 
-## Scripts
-TBA on submit
-### Database construction
-TBA on submit
-## Figures
-TBA on submit
+## Scripts - AEROS-DB construction
+[Scripts folder](https://github.com/xsitarcik/AEROS-DB/tree/main/scripts "scripts") contains 2 scripts:     
+ - [db_build.py](https://github.com/xsitarcik/AEROS-DB/blob/main/scripts/db_build.py) - used to parse operon sequences from database of contigs     
+ - [db_annot.py](https://github.com/xsitarcik/AEROS-DB/blob/main/scripts/db_annot.py) - used to annotate operon sequences with NCBI lineage taxonomy
+
+At first, we used `wget` to download contig databse from Progenomes:    
+`wget https://progenomes.embl.de/data/repGenomes/freeze12.contigs.representatives.fasta.gz`    
+Then we used `db_build.py` and `db_annot.py` to construct AEROS-DB. 
+
 ## References
 Cock, P.A., Antao, T., Chang, J.T., Chapman, B.A., Cox, C.J., Dalke, A., Friedberg, I., Hamelryck T., Kauff, F., Wilczynski, B., de Hoon, M.J.L. (2009). Biopython: freely available Python tools for computational molecular biology and bioinformatics. _Bioinformatics_, 25, 1422-1423. doi:10.1093/bioinformatics/btp163
 
