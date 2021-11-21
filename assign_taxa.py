@@ -74,8 +74,8 @@ def load_args():
         parser.add_argument('-p','--pafs_list', nargs='+', dest='pafs_list', required=True, help='path to PAF file(s)')
         parser.add_argument('-r','--rank', dest='rank', required=True, help='lineage rank used for classification')
         parser.add_argument('-o','--output', dest='out_path', default=None, help='path where to store output')
-        parser.add_argument('-m','--min_length', dest='min_length', default=2999, help='Minimum aligned block length to use')
-        parser.add_argument('-s','--min_score', dest='min_score', default=80, help='Percentage of the best aligned reads to use')
+        parser.add_argument('-m','--min_length', dest='min_length', type=int, default=2999, help='Minimum aligned block length to use')
+        parser.add_argument('-s','--min_score', dest='min_score', type=int, default=80, help='Percentage of the best aligned reads to use')
         args = parser.parse_args()
     except argparse.ArgumentTypeError as e:
         print("Error when parsing input",e.message)
